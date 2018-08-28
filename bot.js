@@ -121,6 +121,7 @@ client.on('message', function(message) {
 		message.reply(':gear: **تم التخطي**').then(() => {
 			skip_song(message);
 			var server = server = servers[message.guild.id];
+			if (message.guild.voiceConnection) message.guild.voiceConnection.end();
 		});
 	}
 	else if (message.content.startsWith('6vol')) {
@@ -147,6 +148,7 @@ client.on('message', function(message) {
 		if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
 		message.reply(':name_badge: **تم الايقاف**');
 		var server = server = servers[message.guild.id];
+		if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
 	}
 	else if (mess.startsWith('6join')) {
 		if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
